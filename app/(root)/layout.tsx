@@ -1,10 +1,11 @@
+import Sidebar from '@/components/Sidebar'
 import React from 'react'
 
 const RootLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <main>
+    <main className='flex'>
+        <Sidebar />
         {children}
-
     </main>
   )
 }
