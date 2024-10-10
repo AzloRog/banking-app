@@ -11,7 +11,13 @@ interface Props {
   iconUrl: string;
   isMobile?: boolean;
 }
-const SidebarButton = ({ title, href, iconUrl, isMobile }: Props) => {
+const SidebarButton = ({
+  title,
+  href,
+  iconUrl,
+  isMobile,
+  ...restProps
+}: Props) => {
   const currentPathname = usePathname();
   const isCurrentPathname = currentPathname == href;
 
@@ -21,6 +27,7 @@ const SidebarButton = ({ title, href, iconUrl, isMobile }: Props) => {
       href={href}
       className={`py-4 px-3 font-semibold flex items-center gap-3 rounded-md 
             ${isCurrentPathname && "bg-gradient-blue text-white"}`}
+      {...restProps}
     >
       <div className="relative size-6">
         <Image

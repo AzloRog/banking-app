@@ -10,6 +10,31 @@ body {
   .bg-gradient-blue {
     @apply bg-gradient-to-r from-[#0179FE] to-[#4893FF];
   }
+  .bg-profile-image {
+    background: url("/profile-image.jpg") 0 0/100% 40% no-repeat;
+
+  }
+  .bg-card-lines {
+    
+  }
+  /*Cards types*/
+  .primary-card {
+    background: url("/icons/bank-card/background-lines.svg") 0 55px no-repeat;
+
+    @apply bg-blue-500
+  }
+  .primary-card > *:last-child {
+
+  }
+  .black-card > *:first-child {
+    @apply bg-gray-500
+  }
+  .black-card > *:last-child {
+    background-image: url("/icons/bank-card/background-lines.svg"),
+                linear-gradient(to top, pink, rgb(101, 13, 184));
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 55px, center;
+  }
 }
 
 @layer base {
