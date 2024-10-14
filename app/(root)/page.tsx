@@ -9,7 +9,7 @@ const Home = () => {
     <section className="flex">
       <section className="pt-12 px-8 w-[70%] flex-initial">
         <Header
-          title="Welcome"
+          title="Добро пожаловать"
           subtitle="Access & manage your account and transactions efficiently."
           userName="Daniel"
         />

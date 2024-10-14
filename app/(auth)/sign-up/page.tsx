@@ -1,9 +1,8 @@
-import React from 'react'
+import CustomForm from "@/components/CustomForm";
+import React from "react";
 
 const SignUp = () => {
-  return (
-    <div>sign-up</div>
-  )
-}
+  return <CustomForm type="sign-up" />;
+};
 
-export default SignUp
+export default SignUp;
