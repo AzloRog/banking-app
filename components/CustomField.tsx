@@ -20,7 +20,7 @@ interface Props {
   name: FieldPath<z.infer<ReturnType<typeof getFormSchema>>>;
   label: string;
   placeholder: string;
-  description: string;
+  description?: string;
 }
 
 const CustomField = ({

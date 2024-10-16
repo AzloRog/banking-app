@@ -11,6 +11,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
+import auth from "@/lib/auth";
 interface Props {
   type: "sign-in" | "sign-up";
 }
@@ -25,7 +26,6 @@ interface formTitles {
 }
 const CustomForm = ({ type }: Props) => {
   const formSchema = getFormSchema(type);
-
   let formTitles: formTitles;
   switch (type) {
     case "sign-in":
@@ -71,14 +71,15 @@ const CustomForm = ({ type }: Props) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const { email, password } = values;
+    if (type == "sign-up") {
+      auth("sign-up", { email, password });
+    }
   }
   return (
     <section className="flex flex-col">
       <div className="mb-11 flex gap-2 items-center text-3xl font-bold ">
-        <Image src="/icons/logo.svg" alt="L" height={32} width={32} />
+        <Image src="/icons/logo.svg" alt="the logo" width={32} height={32} />
         <h1>Banking App</h1>
       </div>
       <div className="mb-8">
@@ -86,13 +87,15 @@ const CustomForm = ({ type }: Props) => {
         <p className="text-gray-600">{formTitles.subtitle}</p>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-5"
+        >
           {type === "sign-up" && (
-            <div>
+            <div className="flex flex-col gap-5">
               <CustomField
                 label="Имя"
                 name="firstName"
-                description="Ваше имя"
                 form={form}
                 placeholder="Иван"
               />
@@ -100,7 +103,6 @@ const CustomForm = ({ type }: Props) => {
               <CustomField
                 label="Фамилия"
                 name="lastName"
-                description="Ваша фамилия"
                 form={form}
                 placeholder="Иванов"
               />
@@ -109,14 +111,12 @@ const CustomForm = ({ type }: Props) => {
           <CustomField
             label="email"
             name="email"
-            description="Ваш email"
             form={form}
             placeholder="example@gmail.com"
           />
           <CustomField
             label="пароль"
             name="password"
-            description="Ваш пароль"
             form={form}
             placeholder="example@gmail.com"
           />
@@ -128,7 +128,7 @@ const CustomForm = ({ type }: Props) => {
           </Button>
         </form>
       </Form>
-      <p className="mt-8 self-center">
+      <p className="text-sm mt-8 self-center">
         <Link
           href={formTitles.altLink.href}
           className="text-blue-700  font-bold underline"
